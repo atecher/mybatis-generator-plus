@@ -15,8 +15,8 @@ public class PaginationPlugin extends PluginAdapter {
 
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         // addfield, getter, setter for limit clause
-        addLimit(topLevelClass,introspectedTable,"limitStart");
-        addLimit(topLevelClass,introspectedTable,"limitEnd");
+        addLimit(topLevelClass,introspectedTable,"start");
+        addLimit(topLevelClass,introspectedTable,"limit");
         return super.modelExampleClassGenerated(topLevelClass,introspectedTable);
     }
 
@@ -25,8 +25,8 @@ public class PaginationPlugin extends PluginAdapter {
                                                                    IntrospectedTable introspectedTable) {
         // LIMIT5,10; // 检索记录行 6-15
         XmlElement isNotNullElement= new XmlElement("if");//$NON-NLS-1$
-        isNotNullElement.addAttribute(new Attribute("test","limitStart != null and limitStart >=0"));//$NON-NLS-1$ //$NON-NLS-2$
-        isNotNullElement.addElement(new TextElement("limit${limitStart} , ${limitEnd}"));
+        isNotNullElement.addAttribute(new Attribute("test","start != null and limit >=0"));//$NON-NLS-1$ //$NON-NLS-2$
+        isNotNullElement.addElement(new TextElement("limit ${start} , ${limit}"));
         element.addElement(isNotNullElement);
         // LIMIT 5;//检索前 5个记录行
 
